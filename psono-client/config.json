@@ -1,0 +1,14 @@
+{
+  "backend_servers": [
+    {
+      "title": "psono.example.com",
+      "url": "https://psono.example.com/server",
+      "domain": "psono.example.com"
+    }
+  ],
+  "base_url": "https://psono.example.com/",
+  "allow_custom_server": false,
+  "allow_registration": false,
+  "allow_lost_password": true,
+  "disable_download_bar": false
+}

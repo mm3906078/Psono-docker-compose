@@ -1,0 +1,66 @@
+version: '3'
+services:
+  psono_reverse:
+    image: nginx:latest
+    container_name: psono_reverse
+    restart: always
+    ports:
+      - "443:443"
+    depends_on:
+      - psono_db
+      - psono_backend
+    links:
+      - psono_backend
+      - psono_client
+      - psono_admin
+    volumes:
+      - /opt/psono/psono-reverse/vhost.conf:/etc/nginx/conf.d/vhost.conf
+      - /etc/letsencrypt/live/psono.routerhosting.com/fullchain.pem:/etc/ssl/psono.routerhosting.com/fullchain.pem
+      - /etc/letsencrypt/live/psono.routerhosting.com/privkey.pem:/etc/ssl/psono.routerhosting.com/privkey.pem
+  
+  psono_db:
+    image: postgres:13-alpine
+    container_name: psono_db
+    environment:
+      - POSTGRES_USER=psono
+      - POSTGRES_PASSWORD=d9O0msfrMOv9C530XVOUoulrln27fHok
+    volumes:
+      - /opt/psono/psono-database:/var/lib/postgresql/data
+    restart: always
+
+  psono_backend:
+    image: psono/psono-server:latest
+    container_name: psono_backend
+    volumes:
+      - /opt/psono/psono-server/settings.yaml:/root/.psono_server/settings.yaml
+    command: >
+      sh -c "sleep 10 &&
+      python3 psono/manage.py migrate &&
+      python3 psono/manage.py createuser admin@psono.routerhosting.com admin admin@example.com &&
+      python3 psono/manage.py promoteuser admin@psono.routerhosting.com superuser &&
+      /bin/sh /root/configs/docker/cmd.sh"
+    links:
+      - psono_db
+    depends_on:
+      - psono_db
+    restart: always
+
+  psono_client:
+    image: psono/psono-client:latest
+    container_name: psono-client
+    volumes:
+      - /opt/psono/psono-client/config.json:/usr/share/nginx/html/config.json
+    restart: always
+    depends_on:
+      - psono_db
+      - psono_backend
+
+  psono_admin:
+    image: psono/psono-admin-client:latest
+    container_name: psono_admin
+    volumes:
+      - /opt/psono/psono-client/config.json:/usr/share/nginx/html/portal/config.json
+    restart: always
+    depends_on:
+      - psono_db
+      - psono_backend
