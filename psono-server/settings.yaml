@@ -8,7 +8,7 @@ PRIVATE_KEY: '73f4e904bd87f9fb8cde85907691d34ad4af3ce768b5ebea2d397f3d06c1c15d'
 PUBLIC_KEY: '91d5172e476416856569f7e9088631a15762db4b8199a7231887f952cdaf3c4a'
 
 # The URL of the web client (path to e.g activate.html without the trailing slash)
-WEB_CLIENT_URL: 'psono.routerhosting.com'
+WEB_CLIENT_URL: 'psono.example.com'
 
 # Switch DEBUG to false if you go into production
 DEBUG: False
@@ -17,7 +17,7 @@ DEBUG: False
 ALLOWED_HOSTS: ['*']
 
 # Should be your domain without "www.". Will be the last part of the username
-ALLOWED_DOMAINS: ['psono.routerhosting.com']
+ALLOWED_DOMAINS: ['psono.example.com']
 
 # If you want to disable registration, you can comment in the following line
 ALLOW_REGISTRATION: False
@@ -33,15 +33,15 @@ ALLOW_REGISTRATION: False
 
 # Should be the URL of the host under which the host is reachable
 # If you open the url and append /info/ to it you should have a text similar to {"info":"{\"version\": \"....}
-HOST_URL: 'https://psono.routerhosting.com'
+HOST_URL: 'https://psono.example.com'
 
 # The email used to send emails, e.g. for activation
 # ATTENTION: If executed in a docker container, then "localhost" will resolve to the docker container, so
 # "localhost" will not work as host. Use the public IP or DNS record of the server.
-EMAIL_FROM: 'mr.salehi@cloudzy.com'
-EMAIL_HOST: 'mail.routerhosting.com'
-EMAIL_HOST_USER: 'mr.salehi@cloudzy.com'
-EMAIL_HOST_PASSWORD : 'DMtbMDcTHSa4qcOve05$^#'
+EMAIL_FROM:
+EMAIL_HOST:
+EMAIL_HOST_USER:
+EMAIL_HOST_PASSWORD :
 EMAIL_PORT: 587
 EMAIL_SUBJECT_PREFIX: ''
 EMAIL_USE_TLS: False
