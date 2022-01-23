@@ -17,11 +17,11 @@ $ apt install certbot -y
 $ certbot certonly
 ```
 use option 1 and enter your email and domain
-# Run
+## Run
 ```sh
 $ docker-compose up -d
 ```
-# Stop
+## Stop
 ```sh
 $ docker-compose stop && docker-compose rm -f
 ```
