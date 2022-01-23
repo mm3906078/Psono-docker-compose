@@ -15,8 +15,8 @@ services:
       - psono_admin
     volumes:
       - /opt/psono/psono-reverse/vhost.conf:/etc/nginx/conf.d/vhost.conf
-      - /etc/letsencrypt/live/psono.routerhosting.com/fullchain.pem:/etc/ssl/psono.routerhosting.com/fullchain.pem
-      - /etc/letsencrypt/live/psono.routerhosting.com/privkey.pem:/etc/ssl/psono.routerhosting.com/privkey.pem
+      - /etc/letsencrypt/live/psono.example.com/fullchain.pem:/etc/ssl/psono.example.com/fullchain.pem
+      - /etc/letsencrypt/live/psono.example.com/privkey.pem:/etc/ssl/psono.example.com/privkey.pem
   
   psono_db:
     image: postgres:13-alpine
@@ -36,8 +36,8 @@ services:
     command: >
       sh -c "sleep 10 &&
       python3 psono/manage.py migrate &&
-      python3 psono/manage.py createuser admin@psono.routerhosting.com admin admin@example.com &&
-      python3 psono/manage.py promoteuser admin@psono.routerhosting.com superuser &&
+      python3 psono/manage.py createuser admin@psono.example.com admin admin@example.com &&
+      python3 psono/manage.py promoteuser admin@psono.example.com superuser &&
       /bin/sh /root/configs/docker/cmd.sh"
     links:
       - psono_db
