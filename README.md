@@ -9,6 +9,7 @@ $ vim docker-compose.yml          # change POSTGRES_PASSWORD & change psono.exam
 $ docker run --rm -ti psono/psono-server:latest python3 ./psono/manage.py generateserverkeys
 $ vim psono-server/settings.yaml  # replace 6 first line with output of above command & change psono.example.com to your domain
 $ vim psono-reverse/vhost.conf    # change psono.example.com to your domain
+$ vim psono-client/config.json    # change psono.example.com to your domain
 ```
 ## TLS
 Use `Certbot` like blow:
